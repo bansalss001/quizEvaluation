@@ -33,9 +33,6 @@ export class Attempts extends Model {
   question_id: number;
 
   @Column
-  time_taken: number;
-
-  @Column
   selection: number;
 
   @Column({

@@ -32,5 +32,5 @@ export class Test extends Model {
   createdAt: Date;
 
   @HasMany(() => Question)
-  questions: Question;
+  questions: Question[];
 }

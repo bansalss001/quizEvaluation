@@ -11,9 +11,10 @@ import { TestTakenService } from './services/test-taken/test-taken.service';
 import { AttemptsService } from './services/attempts/attempts.service';
 import { TestController } from './controllers/test/test.controller';
 import { TestTakenController } from './controllers/test-taken/test-taken.controller';
+import { QuestionController } from './controllers/question/question.controller';
 @Module({
   imports: [ConfigModule.forRoot()],
-  controllers: [AppController, UserController, TestController, TestTakenController],
+  controllers: [AppController, UserController, TestController, TestTakenController, QuestionController],
   providers: [AppService, ...databaseProviders, UserService, TestService, QuestionService, TestTakenService, AttemptsService],
 })
 export class AppModule {}

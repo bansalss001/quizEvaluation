@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Test } from '../../entity/test.entity';
+import { Question } from '../../entity/questions.entity';
 @Injectable()
 export class TestService {
   constructor(
@@ -11,8 +12,12 @@ export class TestService {
     return this.testRepository.findAll<Test>();
   }
 
-  async findById(id: string): Promise<Test> {
-    return this.testRepository.findOne({ where: { id: id } });
+  async findById(id: string): Promise<Partial<Test>> {
+    // TODO: Need To return values without answer and only required questions
+    return this.testRepository.findOne({
+      where: { id: id },
+      include: Question,
+    });
   }
 
   async create(data): Promise<Test> {
