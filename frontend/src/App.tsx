@@ -12,6 +12,7 @@ import { UserService } from './services/user';
 import { User } from './models/user';
 import { Welcome } from './pages/welcome';
 import { AvailableTest } from './pages/AvailableTest';
+import { Test } from './pages/Test';
 import { Header as PageHeader } from './components/header';
 import './App.css';
 import "antd/dist/antd.css";
@@ -43,6 +44,9 @@ function App() {
                </Route>
                <Route exact path="/availableTest">
                  <AvailableTest />
+               </Route>
+               <Route exact path="/test/:id">
+                 <Test />
                </Route>
                <Route exact path="/">
                  <Redirect to="/welcome" />
