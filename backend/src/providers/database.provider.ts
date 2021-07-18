@@ -19,4 +19,20 @@ export const databaseProviders = [
     provide: 'USER_REPOSITORY',
     useValue: User,
   },
+  {
+    provide: 'TEST_REPOSITORY',
+    useValue: Test,
+  },
+  {
+    provide: 'QUESTION_REPOSITORY',
+    useValue: Question,
+  },
+  {
+    provide: 'TEST_TAKEN_REPOSITORY',
+    useValue: TestTaken,
+  },
+  {
+    provide: 'ATTEMPT_REPOSITORY',
+    useValue: Attempts,
+  },
 ];
