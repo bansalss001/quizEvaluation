@@ -1,9 +1,13 @@
-import { Observable } from "rxjs/internal/Observable";
-import { Observer } from 'rxjs/internal/types';
+import { Observable, Observer } from "rxjs";
 import { User } from '../models/user';
 
-let _userObserver: Observer<User> | null;
-export const UserObservable  = new Observable(observer => {
+var _userObserver: Observer<User> = {
+    next: (value: User) => {},
+    error: (err: any) => {},
+    complete: () => {}
+}
+
+export const UserObservable  = new Observable<User>(observer => {
     _userObserver = observer;
 });
 

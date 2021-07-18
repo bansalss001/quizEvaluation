@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { User } from '../models/user';
-import { UserObservable } from '../helpers/event';
-import { Card, Input } from "antd";
+import { UserObservable, UserObserver } from '../helpers/event';
+import { Button, Card, Input, Row } from "antd";
+import { UserService } from "../services/user";
+import Grid from "antd/lib/card/Grid";
 
 export const Welcome = () => {
 
     const [user, setUser] = useState<User>();
+    const [name, setName] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const sub = UserObservable.subscribe((user) => {
@@ -13,7 +17,23 @@ export const Welcome = () => {
                 setUser(user as User);
             }
         })
+
+        return sub.unsubscribe();
     }, [])
+
+    const save = () => {
+        if (name) {
+            setLoading(true);
+            const userService = new UserService();
+            userService.createUser(name).then(response => {
+                console.log(response)
+                if (response.data) {
+                    localStorage.setItem('user_id', response.data.id);
+                    UserObserver?.next(response.data);
+                }
+            })
+        }
+    }
 
     return (
         <div>
@@ -22,8 +42,13 @@ export const Welcome = () => {
                     <Card hoverable>Welcome {user.name}</Card>
                     :
                     <Card title="Welcome !!!" hoverable>
-                        <label>Enter Your Name</label>
-                        <Input></Input>
+                        <Row>
+                            <label>Enter Your Name</label>
+                            <Input placeholder="Eg. Sushant" onChange={e => setName(e.target.value)}></Input>
+                        </Row>
+                        <Row>
+                            <Button color="dark" onClick={() => save()} disabled={!name} loading={loading}>Save</Button>
+                        </Row>
                     </Card>
             }
         </div>
