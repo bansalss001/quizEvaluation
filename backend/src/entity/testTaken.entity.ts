@@ -4,6 +4,7 @@ import {
   Model,
   ForeignKey,
   HasMany,
+  BelongsTo
 } from 'sequelize-typescript';
 
 import { Test } from './test.entity';
@@ -57,4 +58,7 @@ export class TestTaken extends Model {
 
   @HasMany(() => Attempts)
   attempts: Attempts[];
+
+  @BelongsTo(() => Test)
+  test: Test;
 }

@@ -4,12 +4,14 @@ import { UserObservable, UserObserver } from '../helpers/event';
 import { Button, Card, Input, Row } from "antd";
 import { UserService } from "../services/user";
 import Grid from "antd/lib/card/Grid";
+import { useHistory } from "react-router-dom";
 
 export const Welcome = () => {
 
     const [user, setUser] = useState<User>();
     const [name, setName] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const history = useHistory();
 
     useEffect(() => {
         const sub = UserObservable.subscribe((user) => {
@@ -30,6 +32,7 @@ export const Welcome = () => {
                 if (response.data) {
                     localStorage.setItem('user_id', response.data.id);
                     UserObserver?.next(response.data);
+                    history.push('/availableTest')
                 }
             })
         }

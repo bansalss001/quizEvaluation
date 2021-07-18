@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { TestTaken } from '../../entity/testTaken.entity';
 import { Attempts } from '../../entity/attempts.entity';
+import { Test } from '../../entity/test.entity';
 @Injectable()
 export class TestTakenService {
   constructor(
@@ -17,7 +18,7 @@ export class TestTakenService {
   async findUserAttempts(user_id: string): Promise<TestTaken[]> {
     return this.testTakenRepository.findAll({
       where: { user_id: user_id },
-      include: Attempts,
+      include: [Attempts, Test],
     });
   }
 
