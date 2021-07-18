@@ -7,3 +7,5 @@ quizEvaluation Test
         ii. nest new backend
 
     2. Database Desinging - https://dbdesigner.page.link/gbDZYrLzFT3HXbqF8
+
+    3. Database Dump - under folder /database_dump
